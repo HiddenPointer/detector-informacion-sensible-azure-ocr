@@ -4,6 +4,11 @@
       "name": "azure.ocr",
       "type": "com.example.imageprotection.config.AzureOcrConfig",
       "sourceType": "com.example.imageprotection.config.AzureOcrConfig"
+    },
+    {
+      "name": "azure.openai",
+      "type": "com.example.imageprotection.config.AzureOpenAIConfig",
+      "sourceType": "com.example.imageprotection.config.AzureOpenAIConfig"
     }
   ],
   "properties": [
@@ -16,6 +21,21 @@
       "name": "azure.ocr.key",
       "type": "java.lang.String",
       "sourceType": "com.example.imageprotection.config.AzureOcrConfig"
+    },
+    {
+      "name": "azure.openai.deployment-name",
+      "type": "java.lang.String",
+      "sourceType": "com.example.imageprotection.config.AzureOpenAIConfig"
+    },
+    {
+      "name": "azure.openai.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "com.example.imageprotection.config.AzureOpenAIConfig"
+    },
+    {
+      "name": "azure.openai.key",
+      "type": "java.lang.String",
+      "sourceType": "com.example.imageprotection.config.AzureOpenAIConfig"
     }
   ],
   "hints": []

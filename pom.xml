@@ -50,6 +50,24 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+        <!-- Azure OpenAI SDK para detección avanzada -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-ai-openai</artifactId>
+            <version>1.0.0-beta.16</version>
+        </dependency>
+        <!-- Azure Core: contiene KeyCredential y tipos base para SDK -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-core</artifactId>
+            <version>1.52.0</version>
+        </dependency>
+        <!-- HTTP pipeline para Azure SDK -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-core-http-netty</artifactId>
+            <version>1.15.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -4,6 +4,7 @@ import com.example.imageprotection.model.Detection;
 import com.example.imageprotection.model.DetectionRecord;
 import com.example.imageprotection.repository.DetectionRecordRepository;
 import com.example.imageprotection.service.AzureOcrService;
+import com.example.imageprotection.service.AzureOpenAIService;
 import com.example.imageprotection.service.SensitiveDataDetector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,14 +36,17 @@ public class ImageAnalysisController {
 
     private final AzureOcrService azureOcrService;
     private final SensitiveDataDetector sensitiveDataDetector;
+    private final AzureOpenAIService azureOpenAIService;
     private final DetectionRecordRepository detectionRecordRepository;
 
     @Autowired
     public ImageAnalysisController(AzureOcrService azureOcrService,
                                    SensitiveDataDetector sensitiveDataDetector,
+                                   AzureOpenAIService azureOpenAIService,
                                    DetectionRecordRepository detectionRecordRepository) {
         this.azureOcrService = azureOcrService;
         this.sensitiveDataDetector = sensitiveDataDetector;
+        this.azureOpenAIService = azureOpenAIService;
         this.detectionRecordRepository = detectionRecordRepository;
     }
 
@@ -62,8 +66,15 @@ public class ImageAnalysisController {
 
             // Llamar al servicio OCR de Azure para extraer texto
             List<String> lines = azureOcrService.extractText(imageBytes);
-            // Detectar datos sensibles en el texto extraído
-            List<Detection> detections = sensitiveDataDetector.detect(lines);
+            List<Detection> detections;
+            try {
+                // Intentar detección avanzada con IA
+                detections = azureOpenAIService.detectSensitiveData(lines);
+            } catch (Exception aiEx) {
+                // En caso de fallo, usar detección por expresiones regulares
+                logger.warn("AI detection failed, fallback to regex", aiEx);
+                detections = sensitiveDataDetector.detect(lines);
+            }
 
             // Crear entidades para la base de datos con timestamp y hash de imagen
             List<DetectionRecord> records = detections.stream()

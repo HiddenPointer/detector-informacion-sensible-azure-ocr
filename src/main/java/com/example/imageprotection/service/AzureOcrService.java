@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,13 @@ import java.util.List;
 public class AzureOcrService {
     private final AzureOcrConfig config;
     private final RestTemplate restTemplate;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public AzureOcrService(AzureOcrConfig config, RestTemplate restTemplate) {
+    public AzureOcrService(AzureOcrConfig config, RestTemplate restTemplate, ObjectMapper objectMapper) {
         this.config = config;
         this.restTemplate = restTemplate;
+        this.objectMapper = objectMapper;
     }
 
     /**
@@ -38,16 +40,16 @@ public class AzureOcrService {
      *
      * @param imageBytes Arreglo de bytes de la imagen a procesar.
      * @return Lista de cadenas, cada una es una línea de texto detectada.
-     * @throws Exception si ocurre un error en la petición HTTP o en el parseo.
+     * @throws IOException si ocurre un error en la petición HTTP o en el parseo.
      */
-    public List<String> extractText(byte[] imageBytes) throws Exception {
+    public List<String> extractText(byte[] imageBytes) throws IOException {
         URI uri = URI.create(config.getEndpoint());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.set("Ocp-Apim-Subscription-Key", config.getKey());
         HttpEntity<byte[]> entity = new HttpEntity<>(imageBytes, headers);
         ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
-        if (response.getStatusCode() != HttpStatus.OK && response.getStatusCode() != HttpStatus.ACCEPTED) {
+        if (!response.getStatusCode().is2xxSuccessful()) {
             throw new RuntimeException("Error from OCR service: " + response.getStatusCode());
         }
         String body = response.getBody();
