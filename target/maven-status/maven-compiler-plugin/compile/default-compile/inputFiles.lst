@@ -1,0 +1,11 @@
+D:\HACKATHON\src\main\java\com\example\imageprotection\config\AppConfig.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\repository\DetectionRecordRepository.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\service\AzureOcrService.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\config\AzureOpenAIConfig.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\model\DetectionRecord.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\model\Detection.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\config\AzureOcrConfig.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\controller\ImageAnalysisController.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\service\SensitiveDataDetector.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\ImageProtectionApplication.java
+D:\HACKATHON\src\main\java\com\example\imageprotection\service\AzureOpenAIService.java

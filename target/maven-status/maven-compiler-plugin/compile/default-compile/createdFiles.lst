@@ -1,0 +1,13 @@
+com\example\imageprotection\config\AzureOcrConfig.class
+com\example\imageprotection\config\AzureOpenAIConfig.class
+com\example\imageprotection\service\SensitiveDataDetector.class
+com\example\imageprotection\repository\DetectionRecordRepository.class
+META-INF\spring-configuration-metadata.json
+com\example\imageprotection\config\AppConfig.class
+com\example\imageprotection\controller\ImageAnalysisController.class
+com\example\imageprotection\service\AzureOpenAIService.class
+com\example\imageprotection\service\AzureOcrService.class
+com\example\imageprotection\ImageProtectionApplication.class
+com\example\imageprotection\model\Detection.class
+com\example\imageprotection\model\DetectionRecord.class
+com\example\imageprotection\service\AzureOpenAIService$1.class
